@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const userRoute = require('./api/user/user.route');
+const transactionRoute = require('./api/transaction/transaction.route');
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -33,6 +34,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/users', userRoute);
+app.use('/transactions', transactionRoute);
 
 app.use((req, res, next) => {
   const error = new Error('Not Found');
