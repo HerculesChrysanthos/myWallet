@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-function validate(schema, property) {
+const validate = (schema, property) => {
   return (req, res, next) => {
     const { error } = schema.validate(req.body);
     console.log(`validator ${JSON.stringify(req.body)}`);
@@ -17,7 +17,7 @@ function validate(schema, property) {
       res.status(422).json({ error: message });
     }
   };
-}
+};
 
 module.exports = {
   validate,
