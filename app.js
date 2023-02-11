@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const userRoute = require('./api/user/user.route');
 
+app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 mongoose.set('strictQuery', false);
 mongoose.connect(
@@ -29,7 +32,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', () => console.log('hi'));
 app.use('/users', userRoute);
 
 app.use((req, res, next) => {
